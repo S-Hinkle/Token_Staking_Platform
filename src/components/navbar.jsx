@@ -11,6 +11,7 @@ export default function Navbar() {
                 <a className="btn btn-ghost text-xl">DapperFi</a>
             </div>
             <div className="navbar-end flex-1 justify-end">
+                {/* <p>Welcome: </p> */}
                 <ConnectWallet />
             </div>
         </div>
