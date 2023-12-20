@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "npm install && vite build",
+    "build": "npm install && vite build && cd server && npm install",
     "start": "node server/server.js",
     "preview": "vite preview",
     "deploy": "yarn build && npx thirdweb@latest upload dist"
