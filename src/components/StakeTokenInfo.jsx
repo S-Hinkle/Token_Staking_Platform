@@ -1,14 +1,14 @@
 import { useAddress, useTokenBalance, useContract  } from "@thirdweb-dev/react";
-import { rewardTokenAddress } from "../../constants/addresses";
+import { stakeTokenAddress } from "../../constants/addresses";
 
-export default function RewardToken() {
+export default function StakeTokenInfo() {
     const address = useAddress();
-    const { contract, isLoading: loadingRewardToken } = useContract(rewardTokenAddress, "token");
-    const { data: rewardTokenBalance , isLoading: loadingRewardBalance } = useTokenBalance(contract, address);
+    const { contract, isLoading: loadingStakeToken } = useContract(stakeTokenAddress, "token");
+    const { data: stakeTokenBalance , isLoading: loadingStakeBalance } = useTokenBalance(contract, address);
 
 
     // Determine if the component is still loading data
-    const isLoading = loadingRewardToken || loadingRewardBalance;
+    const isLoading = loadingStakeToken || loadingStakeBalance;
 
 
     return (
@@ -19,20 +19,19 @@ export default function RewardToken() {
             ) : (
                 // Show data once it's loaded
                 <div>
-                    {/* Display specific properties of rewardTokenBalance */}
-                    
+                    {/* Display specific properties of stakeTokenBalance */}
                     <div className="stats w-auto border-2 border-indigo-500/75">
 
                     <div className="stat">
                         <div className="stat-figure text-secondary">
                             <div className="avatar">
                                 <div className="w-24 rounded-full">
-                                <img src="public/images/testnet_token_caviar.png" />
+                                <img src="/images/testnet_token_sturgeon.png" />
                                 </div>
                             </div>
                         </div>
-                        <div className="stat-value">Caviar</div>
-                        <div className="stat-title">Reward Token</div>
+                        <div className="stat-value">Sturgeon</div>
+                        <div className="stat-title">Staking Token</div>
                         <div className="stat-desc">Network: Goerli Testnet (Ethereum)</div>
                     </div>
 
@@ -44,7 +43,7 @@ export default function RewardToken() {
                     
                     <div className="stat">
                         <div className="stat-title">Wallet Balance</div>
-                        <div className="stat-value text-secondary">{rewardTokenBalance.displayValue}</div>
+                        <div className="stat-value text-secondary">{stakeTokenBalance.displayValue}</div>
                         <div className="stat-desc"><a href={`https://goerli.etherscan.io/address/${address}`} target="_blank" rel="noreferrer"><u>Search Wallet on EtherScan</u></a></div>
                     </div>
                     

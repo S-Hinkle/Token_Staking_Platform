@@ -10,12 +10,15 @@ import "./styles/globals.css";
 //const activeChain = "ethereum";
 const activeChain = 'goerli';
 
+
+
+
 const container = document.getElementById("root");
 const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <ThirdwebProvider
-      clientId={import.meta.env.CLIENT_ID}
+      clientId={process.env.CLIENT_ID}
       activeChain={activeChain}
     >
       <App />
