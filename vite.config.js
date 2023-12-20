@@ -8,4 +8,9 @@ export default defineConfig({
   define: {
     "process.env": {},
   },
+  server: {
+    proxy: {
+      '/login': 'http://localhost:3000'
+    }
+  }
 });

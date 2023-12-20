@@ -24,8 +24,6 @@ export default function StakeTokens() {
 
     const isLoading = loadingStakeToken || loadingRewardToken || loadingStakeContract || loadingStakeBalance || loadingRewardBalance || loadingStakeInfo;
 
-
-    
     //console.log('Info Contract:',stakeInfo)
     useEffect (() => {
         setInterval(() => {
@@ -63,14 +61,20 @@ export default function StakeTokens() {
 
                     <StakeUnstake stakeTokenBalance={stakeTokenBalance} stakeContract={stakeContract} stakeContractAddress={stakeContractAddress} stakeTokenContract={stakeTokenContract} resetStakeAndClaim={resetStakeAndClaim} handleSuccess={handleSuccess} showToast={showToast}/>
                     
-                    
+
+                    {/* ===================================Unclaimed Rewards=================================== */}
+
                     <div className="flex-1 rounded-md border-2 p-8 border-indigo-500/75">
-                        <div className="stat-value">Unclaimed Rewards</div>
-                        <div className='flex flex-row justify-center'>
-                            <p>{ethers.utils.formatEther(stakeInfo[1])}</p>
-                            <p>{" $" + rewardTokenBalance?.symbol}</p>
+                        <div className="stat-value flex flex-col justify-center items-center mb-4">
+                            <div>Unclaimed Rewards</div>
+                            <div className="stat-desc"><a href={`https://goerli.etherscan.io/address/${stakeContract.contractWrapper.address}`} target="_blank" rel="noreferrer"><u>Search Contract on EtherScan</u></a></div>
                         </div>
-                        <div className='flex justify-center mt-4'>
+                        <div className="divider"></div> 
+                        <div className='flex flex-row justify-center'>
+                            <h1 className="stat-value">{ethers.utils.formatEther(stakeInfo[1])}</h1>
+                            <p className="stat-value">{" $" + rewardTokenBalance?.symbol}</p>
+                        </div>
+                        <div className='flex justify-center mt-8'>
                         
                         <Web3Button
                             contractAddress={stakeContractAddress} 
@@ -78,6 +82,12 @@ export default function StakeTokens() {
                                 await contract.call("claimRewards");
                               }}
                             onSuccess={handleSuccess}
+                            style={{
+                                backgroundColor: '#6366f1', // Example background color
+                                color: '#1f2937', // Text color
+                                padding: '10px 20px', // Padding
+                                borderRadius: '5px', // Border radius
+                              }}
                             >
                             Claim Rewards
                         </Web3Button>
@@ -98,13 +108,13 @@ export default function StakeTokens() {
                 <div className="flex-1 flex flex-col p-4 gap-4">
                     {/* Content of the second column */}
                     <div className="flex-1 rounded-md border-2 p-8 border-indigo-500/75">
-                        <div className="stat-value mb-2">My Position</div>
+                        <div className="stat-value flex flex-col justify-center items-center my-10">My Position</div>
                         <div className="divider"> Unstaked</div>
                             <table className="table">
                                 <tbody>
                                     {/* row 1 */}
                                     <tr>
-                                        <th><img src="/images/testnet_token_sturgeon.png" className="w-24"/></th>
+                                        <th><img src="/images/testnet_token_sturgeon_v3.png" className="w-24"/></th>
                                         <td>Sturgeon</td>
                                         <td>{stakeTokenBalance.displayValue}</td>
                                     </tr>
@@ -115,7 +125,7 @@ export default function StakeTokens() {
                                 <tbody>
                                     {/* row 1 */}
                                     <tr>
-                                        <th><img src="/images/testnet_token_sturgeon.png" className="w-24"/></th>
+                                        <th><img src="/images/testnet_token_sturgeon_v3.png" className="w-24"/></th>
                                         <td>Sturgeon</td>
                                         <td>{ethers.utils.formatEther(stakeInfo[0])}</td>
                                     </tr>

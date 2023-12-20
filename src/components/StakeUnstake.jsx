@@ -20,6 +20,9 @@ export default function StakeUnstake( props ) {
 
     return (
         <div className="h-full rounded-md border-2 p-10 border-indigo-500/75">
+            <div className="stat-value flex flex-col justify-center items-center">Stake/Unstake</div>
+            <div className="stat-title flex flex-col justify-center items-center mb-4">Stake Sturgeon and earn Caviar</div>
+            <div className="divider"></div>
 
             <div role="tablist" className="tabs tabs-boxed mb-4">
                 <a role="tab" 
@@ -58,6 +61,12 @@ export default function StakeUnstake( props ) {
                         }
                     }}
                     onSuccess={props.handleSuccess}
+                    style={{
+                                backgroundColor: '#6366f1', // Example background color
+                                color: '#1f2937', // Text color
+                                padding: '10px 20px', // Padding
+                                borderRadius: '5px', // Border radius
+                              }}
                     >
                         Submit
                 </Web3Button>

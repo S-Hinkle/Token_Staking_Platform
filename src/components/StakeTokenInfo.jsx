@@ -26,7 +26,7 @@ export default function StakeTokenInfo() {
                         <div className="stat-figure text-secondary">
                             <div className="avatar">
                                 <div className="w-24 rounded-full">
-                                <img src="/images/testnet_token_sturgeon.png" />
+                                <img src="/images/testnet_token_sturgeon_v3.png" />
                                 </div>
                             </div>
                         </div>
