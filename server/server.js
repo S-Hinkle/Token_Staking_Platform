@@ -1,19 +1,23 @@
 // Import the necessary modules
 import express from 'express';
 import { promises as fs } from 'fs';
-import dotenv from "dotenv";
 import cors from 'cors';
 import fetch from 'node-fetch';
 import pkg from 'pg';
 const { Pool } = pkg;
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { config } from 'dotenv';
 
-// Congif to use env variables
-dotenv.config();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+config({ path: path.resolve(__dirname, '../.env') });
 
 
 // Create a new pool instance to manage multiple database connections.
 const pool = new Pool({
-    connectionString: ""
+    connectionString: process.env.DATABASE_URL
   });
 
 // Create an Express application
@@ -23,6 +27,12 @@ const app = express();
 // Use middleware to parse JSON bodies, CORS, and run index.html
 app.use(express.json());
 app.use(cors());
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, '../dist')));
+
+
+
 
 
 
@@ -62,6 +72,7 @@ app.get('/wallets', async (req, res) => {
     try {
         const allUsers = await pool.query('SELECT * FROM wallets');
         res.status(200).json(allUsers.rows);
+        console.log(allUsers.rows)
     } catch (error) {
         console.log(error)
         res.status(500).send('Internal Server Error');
@@ -69,12 +80,16 @@ app.get('/wallets', async (req, res) => {
 });
 
 
-// Handle 404 for any other routes
-app.use((req, res) => {
-    res.status(404).send('Not Found');
-});
+
+
+
+
+// Handles any requests that don't match the ones above
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../dist', 'index.html'));
+  });
   
 // Start the server and have it listen on the specified port
-app.listen(3000, () => {
-console.log(`Server running on port 3000`);
+app.listen(process.env.PORT, () => {
+console.log(`Server running on port ${process.env.PORT}`);
 });

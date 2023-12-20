@@ -15,6 +15,7 @@ export default function Home() {
   
   const address = useAddress();
   const [isAdminView, setIsAdminView] = useState(false);
+  const [walletData, setWalletData] = useState(null);
   
   const handleLogin = async () => {
     try {
@@ -41,9 +42,29 @@ export default function Home() {
   };
 
 
+  const fetchData = async () => {
+    console.log("fetching data");
+    try {
+      const response = await fetch('/wallets');
+      //console.log("response", response);
+      if (response.ok) {
+        const data = await response.json();
+        console.log("data", data);
+        setWalletData(data); // Update the state with the API data
+        //console.log('Fetched data:', data);
+      } else {
+        console.log('Response Status:', response.status);
+      }
+    } catch (error) {
+      console.error('Fetch error:', error);
+    }
+  };
+
+
   useEffect(() => {
     if (address) {
       handleLogin();
+      fetchData();
     }
   }, [address]); // The useEffect will run whenever the value of 'address' changes
 
@@ -74,7 +95,7 @@ export default function Home() {
           <Navbar />
           {isAdminView ? (
             // Admin specific page
-            <Dashboard />
+            <Dashboard walletData={walletData} />
           ) : (
             // Normal user view
             <>
