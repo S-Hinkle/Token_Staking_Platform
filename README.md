@@ -1,4 +1,4 @@
-<img src="https://github.com/S-Hinkle/token_staking_platform/blob/main/public/images/token_staking_app_03.png" width="1200" height="500">
+<img src="https://github.com/S-Hinkle/token_staking_platform/blob/main/public/images/token_staking_app_05.png" width="1200" height="500">
 
 ## Overview - Sturgeon Staking Application
 
