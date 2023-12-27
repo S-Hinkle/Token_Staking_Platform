@@ -58,6 +58,7 @@ export default function StakeTokens() {
                 <div className="flex flex-row gap-4">
                 <div className="flex-1 flex flex-col p-4 gap-4">
 
+                    {/* ===================================Stake/Unstake=================================== */}
 
                     <StakeUnstake stakeTokenBalance={stakeTokenBalance} stakeContract={stakeContract} stakeContractAddress={stakeContractAddress} stakeTokenContract={stakeTokenContract} resetStakeAndClaim={resetStakeAndClaim} handleSuccess={handleSuccess} showToast={showToast}/>
                     
@@ -103,7 +104,7 @@ export default function StakeTokens() {
                     </div>
                 </div>
 
-
+                {/* ===================================Current Position=================================== */}
 
                 <div className="flex-1 flex flex-col p-4 gap-4">
                     {/* Content of the second column */}
